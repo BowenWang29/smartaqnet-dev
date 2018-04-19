@@ -1,0 +1,81 @@
+version: '3.2'
+
+services:
+#  web:
+#    image: fraunhoferiosb/sensorthingsserver:latest
+#    build:
+#      ./SensorThingsServer/
+#    ports:
+#      - 8080:8080
+#      - 1883:1883
+#    depends_on:
+#      - database
+
+#  database:
+#    image: mdillon/postgis:latest
+#    environment:
+#      - POSTGRES_DB=sensorthings
+#      - POSTGRES_USER=sensorthings
+#      - POSTGRES_PASSWORD=ChangeMe
+#    volumes:
+#        - /var/lib/postgresql/data:/var/lib/postgresql/data
+
+  smartaqnet-sftp:
+        image: atmoz/sftp
+        ports:
+          - '2222:22'
+        command: upload:mfund:1001
+        volumes:
+            - type: bind
+              source: ./volumes/saqn/
+              target: /home/upload/saqn
+
+  st2sftp:
+    build:
+        ./st2sftp
+    volumes:
+        - type: bind
+          source: ./volumes/saqn/sftp/
+          target: /root/sftp/volumes/saqn/
+
+    depends_on:
+        - smartaqnet-sftp 
+
+
+  fast-data-dev:
+    image: landoop/fast-data-dev
+    network_mode: host
+    environment:
+        SAMPLEDATA: 0
+        RUNNING_SAMPLEDATA: 0
+
+
+
+
+#  fast-data-connect:
+#    image: landoop/fast-data-dev-connect-cluster
+#    network_mode: host
+#    environment:
+#        KAFKA_CONNECT_REST: "localhost:8082"
+
+#  kafka-topics-ui:
+#    image: landoop/kafka-topics-ui
+
+#  schema-regestry-ui:
+#    image: landoop/schema-registry-ui
+
+#  frostyfranz:
+#    build:
+#        ./FrostyFranz
+
+#    depends_on:
+#        - web
+#        - fast-data-dev
+#        - fast-data-connect
+#        - kafka-topics-ui
+#        - schema-regestry-ui
+
+#volumes:
+#    postgis_volume:
+
+
