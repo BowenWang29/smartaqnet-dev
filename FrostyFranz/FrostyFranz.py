@@ -10,9 +10,9 @@ import sys
 from kafka import KafkaProducer
 from kafka import SimpleProducer, KafkaClient
 #basepath = '/root/sftp/volumes/saqn/'
-smartaqnetHome = 'smartaqnet.teco.edu'
+#smartaqnetHome = 'smartaqnet.teco.edu'
 
-smartaqnetHome = 'smartaqnet-dev.teco.edu'
+smartaqnetHome = os.getenv('smartaqnethome','smartaqnet-dev01.teco.edu')
 #smartaqnetHome = 'localhost'
 
 def on_connect(client, userdata, flags, rc):
