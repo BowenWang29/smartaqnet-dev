@@ -1,0 +1,35 @@
+version: '3.2'
+services:
+        omniFDD:
+                image: landoop/fast-data-dev:latest
+                network_mode: host
+                environment:
+                        ZK_PORT: "${ZK_PORT}"
+                        FORWARDLOGS: 0
+                        KAFKA_LISTENERS: "9092://:9093"
+                        BROKER_PORT: 9093
+                        #RUNTESTS: 0
+                        #SAMPLEDATA: 0
+                        RUNNING_SAMPLEDATA: 0
+                        CONNECT_HEAP: "3G"
+                        ADV_HOST: "${SMARTAQNET_URL}"
+                ports:
+                        - '3030:3030'
+        kafkaNode:
+                image: landoop/fast-data-dev:latest
+                network_mode: host
+                environment:
+                        ZK_PORT: 0
+                        BROKER_PORT: 9092
+                        KAFKA_ZOOKEEPER_CONNECT: "${SMARTAQNET_URL}:${ZK_PORT}"
+                        KAFKA_BROKER_ID: 1
+                        FORWARDLOGS: 0
+                        RUNTESTS: 0
+                        REGISTRY_PORT: 8085
+                        CONNECT_PORT: 8086
+                        WEB_PORT: 0
+                        CONNECT_HEAP: "3G"
+                ports:
+                        - '3030:3031'
+                depends_on:
+                        - omniFDD

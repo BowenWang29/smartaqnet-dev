@@ -8,7 +8,8 @@ docker-compose -f ./Frost-Server/docker-compose.yml exec database psql -U sensor
 curl -X POST http://localhost:8080/FROST-Server/DatabaseStatus
 # Set up landoop and sftp
 sleep 3m
-docker-compose -f ./docker-compose.yml up --build -d
+#docker-compose -f ./docker-compose.yml up --build -d
+docker run --rm --net=host -e ADV_HOST=smartaqnet-dev.teco.edu landoop/fast-data-dev
 # Set up ST2SFTP
 # Set up FrostFranz
 sleep 3m
