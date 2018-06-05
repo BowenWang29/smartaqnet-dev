@@ -42,7 +42,7 @@ def on_message(client, userdata, msg):
 
     iot_id = data.get('@iot.id')
     print(iot_id)
-    producer.send(topic, key= str(iot_id), value=msg.payload)
+    producer.send(topic, key= str(iot_id), value=data)
     producer.flush()
 
 
@@ -50,7 +50,7 @@ kafka = KafkaClient( smartaqnetHome +':9092')
 
 #producer = SimpleProducer(kafka, async=True)
 #producer.send_messages(b'my-topic', b'async message')
-producer = KafkaProducer(bootstrap_servers=smartaqnetHome + ':9092',value_serializer=lambda v: json.dumps(v).encode('utf-8'), compression_type='gzip')
+producer = KafkaProducer(bootstrap_servers=smartaqnetHome + ':9092',value_serializer=lambda v: json.dumps(v).encode('utf-8'), compression_type='lz4')
 
 #producer.send('fizzbuzz', key= 'uid', value={'foo': 'bar'})
 client = mqtt.Client()

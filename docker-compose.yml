@@ -42,12 +42,12 @@ services:
         - smartaqnet-sftp 
 
 
-  fast-data-dev:
-    image: landoop/fast-data-dev
-    network_mode: host
-    environment:
-        SAMPLEDATA: 0
-        RUNNING_SAMPLEDATA: 0
+          #  fast-data-dev:
+          #    image: landoop/fast-data-dev
+          #    network_mode: host
+          #    environment:
+          #        SAMPLEDATA: 0
+          #        RUNNING_SAMPLEDATA: 0
 
 
 

@@ -1,5 +1,5 @@
 #! /bin/bash
-apt update --assmue-yes
+apt update --assume-yes
 apt upgrade --assume-yes
 #Install packages to allow apt to use a repository over HTTPS:
 apt-get install \
