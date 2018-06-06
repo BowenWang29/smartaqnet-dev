@@ -2,12 +2,12 @@
 apt update --assume-yes
 apt upgrade --assume-yes
 #Install packages to allow apt to use a repository over HTTPS:
-apt-get install \
+apt-get install\
      apt-transport-https \
      ca-certificates \
      curl \
      gnupg2 \
-     software-properties-common
+     software-properties-common -assume-yes
 
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 
