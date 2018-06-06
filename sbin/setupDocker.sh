@@ -7,7 +7,7 @@ apt-get install\
      ca-certificates \
      curl \
      gnupg2 \
-     software-properties-common -assume-yes
+     software-properties-common 
 
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 
