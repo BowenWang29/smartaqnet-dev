@@ -12,9 +12,9 @@ from kafka import SimpleProducer, KafkaClient
 #basepath = '/root/sftp/volumes/saqn/
 import Helper
 
-kafkaHome = Helper.Helper.Kafkas["swarm"].split("/")[-1]
+kafkaHome = Helper.Helper.Kafkas["dev"].split("/")[-1]
 
-frostHome = Helper.Helper.Frosts["dev01"].split("/")[-1]
+frostHome = Helper.Helper.Frosts["dev"].split("/")[-1]
 
 def on_connect(client, userdata, flags, rc):
      print('Starting to log data.')
@@ -43,18 +43,25 @@ def on_message(client, userdata, msg):
 
     data = json.loads(payload.decode("utf-8"))
     if(topic == "Observations"):
-        iot_id = data['Datastream']['@iot.id']
+        iot_id = data['@iot.id']
+        #print(data)
+        #iot_id = data-get('@iot.id')
     else:
         iot_id = data.get('@iot.id')
-    #print(data)
-    producer.send(topic, key= str(iot_id), value=data)#msg.payload)
+    #print(pdata)
+    pdata = Helper.popKeys(data) 
+    producer.send(topic, key= str(iot_id), value=pdata)#msg.payload)
     producer.flush()
 
 #kafka = KafkaClient( kafkaHome +':9092')
 
 #producer = SimpleProducer(kafka, async=True)
 #producer.send_messages(b'my-topic', b'async message')
-producer = KafkaProducer(bootstrap_servers=kafkaHome + ':29092',value_serializer=lambda v: json.dumps(v).encode('utf-8'), compression_type='gzip')
+
+
+#print(kafkaHome)
+
+producer = KafkaProducer(bootstrap_servers= kafkaHome + ':9092',value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
 #producer.send('fizzbuzz', key= 'uid', value={'foo': 'bar'})
 
