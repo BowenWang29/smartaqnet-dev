@@ -1,0 +1,15 @@
+version: '3.2'
+services:
+        frosty_landoop:
+                image: landoop/fast-data-dev:latest
+                network_mode: host
+                environment:
+                        CONNECT_HEAP: "1G"
+                        FORWARDLOGS: 0
+                        #BROKER_PORT: 9092
+                        RUNTESTS: 0
+                        #SAMPLEDATA: 0
+                        RUNNING_SAMPLEDATA: 0
+                        ADV_HOST: "${smartaqnethome}"
+                ports:
+                        - '3030:3030'
