@@ -1,7 +1,7 @@
 #! /bin/bash
 cd ..
 if test -z "$smartaqnethome"
-then echo "export smartaqnethome=localhost" > /etc/environment
+then echo "export smartaqnethome=$(uname -n).teco.edu" > /etc/environment
 fi
 source /etc/environment
 # Set up SensorThingsServerDocker
