@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  database:
+    build:
+      #image: mdillon/postgis:latest
+      context: .
+      dockerfile: Dockerfile
+      #restart: unless-stopped
+    environment:
+      - POSTGRES_DB=sensorthings
+      - POSTGRES_USER=sensorthings
+      - POSTGRES_PASSWORD=ChangeMe
+    ports:
+        - 5432:5432
+    volumes:
+      - postgis_data_volume:/var/lib/postgresql/data
+      - postgis_backup_volume:/var/lib/postgresql/backup
+
+volumes:
+    postgis_data_volume:
+      driver: local
+      driver_opts:
+        type: 'none'
+        o: 'bind'
+        device: '/root/smartaqnet-dev/volumes/frost/postgis_data_volume'
+    postgis_backup_volume:
+      driver: local
+      driver_opts:
+        type: 'none'
+        o: 'bind'
+        device: '/root/smartaqnet-dev/volumes/frost/postgis_backup_volume'
