@@ -1,5 +1,5 @@
 # smartaqnet-dev
-Docker based smartaqnet-dev environment. It contains four major components: _FROST-Server-GUI_,_FROST-Server-Database_, _Fast-Data-Dev_, _Scripts_.
+Docker based smartaqnet-dev environment. It contains four major components: **FROST-Server-GUI**, **FROST-Server-Database**, **Fast-Data-Dev**, **Scripts**.
 ## FROST-Server-GUI
 An implementation of the SensorthingsAPI implemented by [FraunhoferIOSB/FROST-Server](https://github.com/FraunhoferIOSB/FROST-Server).
 ## FROST-Server-Database
